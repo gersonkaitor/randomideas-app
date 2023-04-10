@@ -5,8 +5,7 @@ import IdeaList from './components/IdeaList';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './css/style.css';
 
-const modal = new Modal();
+new Modal();
 const ideaForm = new IdeaForm();
 ideaForm.render();
-const ideaList = new IdeaList();
-ideaList.render();
+new IdeaList();

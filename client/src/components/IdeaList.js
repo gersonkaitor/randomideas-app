@@ -18,12 +18,16 @@ class IdeaList {
   async getIdeas() {
     try {
       const res = await IdeasApi.getIdeas();
-      console.log(res);
       this._ideas = res.data.data;
       this.render();
     } catch (error) {
       console.log(error);
     }
+  }
+
+  addIdeaToList(idea) {
+    this._ideas.push(idea);
+    this.render();
   }
 
   getTagClass(tag) {
