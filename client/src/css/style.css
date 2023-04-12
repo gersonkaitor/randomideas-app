@@ -62,12 +62,21 @@ header {
 }
 
 form input,
-form textarea {
-  width: 95%;
+form textarea,
+form select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px 0;
+}
+
+form input,
+form textarea {
+  width: 95%;
+}
+
+form select {
+  width: 98%;
 }
 
 form textarea {
@@ -79,6 +88,26 @@ form label {
   font-size: 18px;
   font-weight: 600;
   margin: 5px 0;
+}
+
+.btn-close {
+  border: none;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  float: right;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .btn {
@@ -95,6 +124,9 @@ form label {
 
 .btn:hover {
   background-color: #000;
+}
+.update {
+  background-color: green;
 }
 
 .container {
@@ -169,6 +201,11 @@ form label {
 .date {
   color: #999;
   font-size: 14px;
+}
+
+.edit-idea:hover {
+  cursor: pointer;
+  color: #8ab4f8;
 }
 
 @media (max-width: 768px) {

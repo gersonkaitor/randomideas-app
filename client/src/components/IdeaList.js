@@ -1,4 +1,6 @@
 import IdeasApi from '../services/ideasApi';
+import Modal from './Modal';
+import IdeaForm from './IdeaForm';
 
 class IdeaList {
   constructor() {
@@ -23,6 +25,13 @@ class IdeaList {
 
         this.deleteIdea(ideaId);
       }
+
+      if (e.target.classList.contains('edit-idea')) {
+        e.stopImmediatePropagation();
+        const modal = new Modal();
+        modal.open();
+        this.editIdea(e);
+      }
     });
   }
 
@@ -46,7 +55,27 @@ class IdeaList {
     }
   }
 
-  addIdeaToList(idea) {
+  editIdea(e) {
+    const ideaId = e.target.parentElement.dataset.id;
+    if (e.target.classList.contains('edit-idea')) {
+      const data = {
+        id: ideaId,
+        text: document.querySelector('.edit-idea').textContent,
+        tag: document.querySelector('.edit-idea').nextElementSibling
+          .textContent,
+      };
+      const ideaForm = new IdeaForm();
+      ideaForm.editIdea(data);
+    }
+  }
+
+  addIdeaToList(idea, edit) {
+    if (edit) {
+      this._ideas.filter((ideas) => {
+        ideas._id !== idea._id;
+      });
+      this.getIdeas();
+    }
     this._ideas.push(idea);
     this.render();
   }
@@ -70,6 +99,10 @@ class IdeaList {
           idea.username === localStorage.getItem('username')
             ? '<button class="delete"><i class="fas fa-times"></i></button>'
             : '';
+        const editIdea =
+          idea.username === localStorage.getItem('username')
+            ? `class="edit-idea"`
+            : '';
 
         const monthNames = [
           'January',
@@ -92,9 +125,9 @@ class IdeaList {
         const dateFormat = `${m} ${d}, ${y}`;
 
         return `
-        <div class="card" data-id="${idea._id}">
+        <div class="card" data-id="${idea._id}" >
             ${deleteBtn}
-            <h3>${idea.text}</h3>
+            <h3 ${editIdea} >${idea.text}</h3>
             <p class="tag ${tagClass}">${idea.tag.toUpperCase()}</p>
             <p>
                 Posted on <span class="date">${dateFormat} </span> by

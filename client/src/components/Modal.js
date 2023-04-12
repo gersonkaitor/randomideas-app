@@ -17,6 +17,11 @@ class Modal {
 
   close() {
     this._modal.style.display = 'none';
+    this._formBtn = document.querySelector('#submit');
+    this._formBtn.classList.remove('update');
+    this._formBtn.textContent = 'Submit';
+    this._modal.children[0].children[0].removeAttribute('data-id');
+    this._modal.children[0].children[0].elements.username.disabled = false;
   }
 
   outsideClick(e) {
